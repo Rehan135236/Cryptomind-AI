@@ -1,0 +1,11 @@
+Ethereum is a decentralized blockchain platform that enables smart contracts and decentralized applications.
+
+Ethereum uses proof-of-stake consensus to secure its network. Validators participate in the consensus process by staking ETH. Validators are responsible for proposing and validating blocks and helping maintain the integrity of the blockchain.
+
+Ethereum transitioned from proof-of-work to proof-of-stake through an upgrade known as The Merge. Proof-of-stake reduces the energy required to secure the network compared with proof-of-work.
+
+ETH is the native cryptocurrency of the Ethereum network. It is used to pay transaction fees, interact with smart contracts, and participate in the proof-of-stake consensus mechanism.
+
+Smart contracts are programs stored on the Ethereum blockchain that automatically execute when their predefined conditions are met. Developers can use smart contracts to build decentralized applications, financial protocols, games, marketplaces, and other blockchain-based systems.
+
+Ethereum transactions require gas. Gas measures the computational work required to execute operations on the network. Users pay transaction fees in ETH based on the amount of computational resources their transactions require.
