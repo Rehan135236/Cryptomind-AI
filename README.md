@@ -1,238 +1,155 @@
 # CryptoMind AI
 
-**AI-powered cryptocurrency research and analysis agent built with Python, PostgreSQL, FastAPI, LangChain, LangGraph, and Groq.**
+**AI-powered cryptocurrency research and analysis agent built with Python, PostgreSQL, FastAPI, Pinecone, Hugging Face, LangChain, LangGraph, and Groq.**
 
-CryptoMind is an AI-driven crypto research platform that combines historical market data, quantitative analytics, SQL-based data access, LLM reasoning, and agentic workflows to generate structured cryptocurrency analysis.
-
-> **Project status:** 🚧 In active development
+CryptoMind is an AI-driven crypto research platform that combines historical market data, quantitative analytics, vector-based document retrieval (RAG), RSS news feeds, LLM reasoning, and stateful agentic workflows to generate grounded cryptocurrency research.
 
 ---
 
-## 🚀 Overview
+## 📌 Current Status
 
-CryptoMind is being developed as an end-to-end **AI Financial Research Agent for cryptocurrency markets**.
+> **Milestone Checkpoint: AI Research Agent Foundation**
+>
+> CryptoMind has reached the **AI research agent foundation** milestone. The system can retrieve crypto market analytics, search crypto-related documents using RAG, retrieve recent crypto news via RSS feeds, and use LangGraph with Groq to orchestrate these tools into a single research response.
+>
+> ⏸️ **Development Notice:** Active development is currently **paused** at this milestone checkpoint. Development will resume in the next phase focusing on structured research report generation, stronger evidence/source tracking, live market synchronization, and evaluation frameworks.
 
-The system collects cryptocurrency market data, stores it in PostgreSQL, calculates quantitative metrics, exposes the analysis through FastAPI, and uses LLMs and agentic workflows to answer research questions using actual data rather than invented metrics.
+---
 
-The long-term goal is to build an AI research assistant capable of combining:
+## 🚀 Overview & Problem Solved
 
-* 📊 Market analytics
-* 🤖 LLM reasoning
-* 🛠️ Tool calling
-* 🧠 LangGraph agent workflows
-* 📚 Retrieval-Augmented Generation (RAG)
-* 📰 Crypto news intelligence
-* ⛓️ On-chain analysis
-* 🔎 Research and evaluation
+Traditional financial research with Large Language Models (LLMs) often suffers from hallucinated market metrics, outdated facts, and lack of real-time market context. 
+
+**CryptoMind solves this by enforcing strict tool-grounded reasoning:**
+
+1. **Quantitative Market Grounding**: All prices, moving averages, 7d/30d returns, volatilities, drawdowns, and Sharpe ratios are calculated via Pandas and queried directly from PostgreSQL.
+2. **Knowledge Base Grounding (RAG)**: Technical document queries (e.g. consensus mechanisms, protocol specs) retrieve embedded chunks from Pinecone vector store using Hugging Face's `sentence-transformers/all-MiniLM-L6-v2`.
+3. **News Intelligence**: Recent market events are fetched dynamically from active RSS feeds (CoinDesk, Decrypt, CryptoSlate, Bitcoin Magazine) filtered by cryptocurrency symbols (BTC, ETH, SOL, BNB).
+4. **Agentic Orchestration**: LangGraph coordinates multi-tool tool calling, allowing the LLM to autonomously decide which tools to invoke before synthesizing a factual final answer.
 
 ---
 
 ## 🏗️ Architecture
 
 ```text
-                    User
-                      │
-                      ▼
-              React / Next.js
-                      │
-                      ▼
-                  FastAPI
-                      │
-                      ▼
-               LangGraph Agent
-                      │
-          ┌───────────┼───────────┐
-          ▼           ▼           ▼
-     SQL Tool    Market Tool    RAG Tool
-          │           │           │
-          ▼           ▼           ▼
-     PostgreSQL   Crypto APIs   Vector DB
-          │
-          └───────────┬───────────┘
-                      ▼
-                 AI Researcher
-                      │
-                      ▼
-              Structured Report
+                                   USER
+                                    │
+                                    ▼
+                      LangGraph Agent Orchestrator
+                           (src/graph.py)
+                                    │
+                                    ▼
+                      LLM (Groq - openai/gpt-oss-120b)
+                                    │
+                                    ▼
+                           Tool Decision Node
+                                    │
+     ┌──────────────────┬───────────┴───────────┬──────────────────┐
+     ▼                  ▼                       ▼                  ▼
+Market Analysis   Crypto Comparison      RAG Document Search   Crypto News Search
+  (PostgreSQL)      (Multi-asset)            (Pinecone DB)        (RSS Feeds)
+     │                  │                       │                  │
+     └──────────────────┴───────────┬───────────┴──────────────────┘
+                                    ▼
+                         Tool Results Execution
+                                    │
+                                    ▼
+                    LLM Synthesis & Grounded Reasoning
+                                    │
+                                    ▼
+                          Final Research Answer
 ```
 
 ---
 
-## ✨ Current Features
+## ✨ Milestone Capabilities
 
-### Market Data
+### 1. Quantitative Analytics Engine
+Calculates core quantitative finance metrics from stored historical price data:
+* Current & Average Price, Min/Max Price
+* 7-Day & 30-Day Moving Averages
+* 7-Day & 30-Day Returns
+* Daily Volatility & Maximum Drawdown
+* Sharpe Ratio & Asset Correlations
 
-CryptoMind currently works with:
+### 2. Retrieval-Augmented Generation (RAG) Pipeline
+* Custom document chunking using LangChain text splitters (`src/document_loader.py`)
+* Vector embeddings using Hugging Face Inference API (`sentence-transformers/all-MiniLM-L6-v2`)
+* Vector indexing and top-k similarity search in Pinecone (`src/rag.py`, `src/ingest_documents.py`)
 
-* Bitcoin (BTC)
-* Ethereum (ETH)
-* Solana (SOL)
-* BNB
+### 3. Crypto News Retrieval
+* Live RSS parsing across major crypto outlets (`src/news.py`)
+* Automatic keyword matching for symbol-specific news filtering (BTC, ETH, SOL, BNB)
 
-Historical market data is collected through the CoinGecko API and stored in PostgreSQL.
+### 4. Agentic Workflow (LangGraph)
+* Stateful execution loop powered by `langgraph.graph.StateGraph` (`src/graph.py`)
+* Native Groq tool-calling format supporting dynamic function execution (`get_crypto_analysis`, `compare_crypto_assets`, `search_crypto_documents`, `search_crypto_news`)
+* Strict system prompts preventing hallucinated financial metrics or ungrounded claims
 
-### Quantitative Analytics
-
-The analytics layer currently calculates:
-
-* Current price
-* Average price
-* Minimum and maximum price
-* 7-day moving average
-* 30-day moving average
-* 7-day return
-* 30-day return
-* Daily volatility
-* Maximum drawdown
-* Sharpe ratio
-
-### Cryptocurrency Comparison
-
-CryptoMind can compare multiple assets and generate a structured comparison.
-
-Example:
-
-```text
-BTC
-ETH
-SOL
-BNB
-```
-
-### Correlation Analysis
-
-The system calculates correlations between cryptocurrency returns to help identify relationships between assets.
-
-### FastAPI
-
-The analytical functionality is exposed through REST API endpoints.
-
-Current endpoints include:
-
-```text
-GET /
-GET /crypto/{symbol}
-GET /compare
-GET /correlation
-```
-
-Interactive API documentation is available through FastAPI/Swagger.
-
-### LLM Integration
-
-CryptoMind uses **Groq** and `openai/gpt-oss-20b` for LLM reasoning.
-
-The LLM can interact with analytical tools instead of relying only on its internal knowledge.
-
-### Tool Calling
-
-The project currently includes tools for:
-
-* Individual cryptocurrency analysis
-* Cryptocurrency comparison
-
-The system is designed so that market metrics come from the database and analytics layer rather than being manually generated by the LLM.
+### 5. REST API (FastAPI)
+* Exposed analytical endpoints (`/`, `/crypto/{symbol}`, `/compare`, `/correlation`) with interactive Swagger docs.
 
 ---
 
-## 🧠 LangChain
+## 📊 Development State Summary
 
-LangChain is used to connect the LLM with CryptoMind's analytical tools.
+### COMPLETED
+* ✅ Data pipeline & historical price ingestion
+* ✅ PostgreSQL storage & SQLAlchemy ORM
+* ✅ Quantitative crypto analytics (returns, moving averages, volatility, drawdown, Sharpe ratio)
+* ✅ FastAPI REST backend
+* ✅ Hugging Face vector embeddings & Pinecone RAG document retrieval
+* ✅ Crypto news retrieval through RSS feeds (CoinDesk, Decrypt, CryptoSlate, Bitcoin Magazine)
+* ✅ Groq LLM integration (`openai/gpt-oss-120b`)
+* ✅ Tool calling (manual, LangChain, native Groq tool calling)
+* ✅ LangGraph orchestration loop (StateGraph, conditional routing, multi-tool execution)
+* ✅ AI research agent foundation
 
-Current workflow:
-
-```text
-User Question
-     │
-     ▼
-   LLM
-     │
-     ▼
-Tool Selection
-     │
-     ▼
-Crypto Analytics Tool
-     │
-     ▼
-PostgreSQL
-     │
-     ▼
-Calculated Metrics
-     │
-     ▼
-   LLM
-     │
-     ▼
-Final Response
-```
+### IN PROGRESS / NEXT
+* ⏳ Structured research reports & report generation modules
+* ⏳ Source and evidence tracking enhancements
+* ⏳ Live/current market data synchronization
+* ⏳ Agent evaluation framework & benchmarks
+* ⏳ React / Next.js frontend dashboard
+* ⏳ Docker containerization
+* ⏳ Production cloud deployment
 
 ---
 
-## 🕸️ LangGraph
+## 🗺️ Milestone Checklist
 
-LangGraph is currently being integrated into the project to create a stateful agent workflow.
-
-Planned workflow:
-
-```text
-START
-  │
-  ▼
-LLM
-  │
-  ├──► Direct Answer
-  │
-  └──► Tool Call
-          │
-          ▼
-      Tool Execution
-          │
-          ▼
-          LLM
-          │
-          ▼
-         END
-```
-
-This will allow CryptoMind to move from a simple LLM + tool-calling application toward a more structured **agentic architecture**.
+1. Project setup                  ✅
+2. Live crypto API                ✅
+3. Multiple cryptocurrencies      ✅
+4. Historical data                ✅
+5. Pandas transformation          ✅
+6. PostgreSQL                     ✅
+7. Crypto analytics               ✅
+8. FastAPI                        ✅
+9. LLM                            ✅
+10. Tool calling                  ✅
+11. LangChain                     ✅
+12. LangGraph                     ✅
+13. RAG                            ✅
+14. Crypto news                    ✅
+15. AI research agent foundation  ✅
+16. Structured research reports    ⏳
+17. Agent evaluation              ⏳
+18. React frontend                ⏳
+19. Docker                         ⏳
+20. Deployment                    ⏳
 
 ---
 
 ## 🛠️ Technology Stack
 
-### Backend
-
-* Python
-* FastAPI
-* PostgreSQL
-* SQLAlchemy
-* Psycopg2
-
-### Data & Analytics
-
-* Pandas
-* NumPy
-* SQL
-* Financial/quantitative analytics
-
-### AI
-
-* Groq
-* `openai/gpt-oss-20b`
-* LangChain
-* LangGraph
-* Tool Calling
-
-### Data Source
-
-* CoinGecko API
-
-### Development
-
-* Git
-* GitHub
-* VS Code
-* Python virtual environment
+* **Backend Framework**: Python 3.10+, FastAPI, Uvicorn
+* **Database & ORM**: PostgreSQL, SQLAlchemy, Psycopg2
+* **Data Processing**: Pandas, NumPy
+* **Vector DB & RAG**: Pinecone, Hugging Face Inference Client (`all-MiniLM-L6-v2`), LangChain Text Splitter
+* **AI & Agent Orchestration**: Groq (`openai/gpt-oss-120b`), LangGraph, LangChain
+* **News Processing**: Python `xml.etree.ElementTree`, Requests
+* **External APIs**: CoinGecko API, Hugging Face API, Pinecone API, Groq API
 
 ---
 
@@ -243,238 +160,120 @@ cryptomind/
 │
 ├── src/
 │   ├── __init__.py
-│   ├── market_api.py
-│   ├── data_processor.py
-│   ├── database.py
-│   ├── pipeline.py
-│   ├── check_database.py
-│   ├── cleanup_database.py
-│   ├── add_constraint.py
-│   ├── analytics.py
-│   ├── correlation.py
-│   ├── tools.py
-│   ├── llm.py
-│   ├── langchain_agent.py
-│   ├── graph.py
-│   └── api.py
+│   ├── add_constraint.py        # DB schema helpers
+│   ├── analytics.py             # Quantitative analytics engine
+│   ├── api.py                   # FastAPI REST API endpoints
+│   ├── check_database.py        # Database verification helper
+│   ├── cleanup_database.py      # Database cleanup script
+│   ├── cleanup_pinecone.py      # Pinecone test vector cleanup utility
+│   ├── config.py                # Database configuration
+│   ├── correlation.py           # Asset correlation calculations
+│   ├── data_processor.py        # Data cleaning and transformation
+│   ├── database.py             # SQLAlchemy models and engine setup
+│   ├── document_loader.py       # LangChain document splitter
+│   ├── embeddings.py            # Hugging Face embedding generator
+│   ├── graph.py                 # Core LangGraph AI Research Agent
+│   ├── ingest_documents.py      # Vector ingestion script for RAG
+│   ├── langchain_agent.py       # LangChain agent experiment
+│   ├── llm.py                   # Groq LLM client
+│   ├── market_api.py            # CoinGecko market API client
+│   ├── news.py                  # Crypto RSS news parser and matcher
+│   ├── pinecone_test.py         # Pinecone vector store test script
+│   ├── pipeline.py              # Market data ETL pipeline
+│   ├── rag.py                   # Pinecone document similarity search
+│   ├── rag_qa.py                # RAG question-answering module
+│   ├── test_coingecko.py        # CoinGecko API connection test
+│   ├── test_huggingface.py      # Hugging Face API token check
+│   └── tools.py                 # Unified agent tool definitions
 │
 ├── data/
 │   ├── raw/
-│   └── processed/
+│   ├── processed/
+│   └── documents/
+│       └── ethereum.txt
 │
 ├── tests/
-│
-├── .gitignore
-├── requirements.txt
-└── README.md
+├── .env                         # Environment variables (IGNORED)
+├── .gitignore                   # Git ignore file
+├── requirements.txt             # Python dependencies
+└── README.md                    # Project documentation
 ```
-
----
-
-## 🔄 Data Pipeline
-
-```text
-CoinGecko API
-      │
-      ▼
-Historical Crypto Data
-      │
-      ▼
-Pandas Transformation
-      │
-      ▼
-PostgreSQL
-      │
-      ▼
-Analytics Engine
-      │
-      ▼
-FastAPI / AI Tools
-      │
-      ▼
-LLM Agent
-```
-
----
-
-## 📊 Example Analysis
-
-CryptoMind can retrieve metrics such as:
-
-```text
-BTC
-Current Price: $77,447.08
-7-Day Return: -2.08%
-30-Day Return: +22.10%
-Volatility: 2.46%
-Maximum Drawdown: -5.80%
-
-ETH
-Current Price: $2,539.84
-7-Day Return: +1.03%
-30-Day Return: +34.78%
-Volatility: 3.85%
-Maximum Drawdown: -4.94%
-```
-
-These values are generated from the project's stored market data and analytical calculations.
-
----
-
-## 🗺️ Roadmap
-
-### Completed
-
-* [x] Project setup
-* [x] Cryptocurrency market API integration
-* [x] Multiple cryptocurrency support
-* [x] Historical data collection
-* [x] Pandas data processing
-* [x] PostgreSQL database
-* [x] Quantitative analytics
-* [x] Correlation analysis
-* [x] FastAPI backend
-* [x] Groq LLM integration
-* [x] Tool calling
-* [x] LangChain integration
-* [x] Initial LangGraph integration
-
-### In Progress
-
-* [ ] Complete LangGraph agent workflow
-* [ ] SQL agent tool
-* [ ] RAG pipeline
-* [ ] Crypto research document ingestion
-* [ ] Crypto news intelligence
-* [ ] Agent evaluation
-* [ ] LangSmith observability
-
-### Planned
-
-* [ ] On-chain analytics
-* [ ] React / Next.js frontend
-* [ ] Interactive research dashboard
-* [ ] Dockerization
-* [ ] Cloud deployment
-* [ ] Production monitoring
-* [ ] Automated research reports
 
 ---
 
 ## 🔐 Environment Variables
 
-Create a `.env` file locally:
+Create a `.env` file in the project root:
 
 ```env
-DATABASE_URL=your_postgresql_connection_string
+DATABASE_URL=postgresql://postgres:password@localhost:5432/cryptomind
 GROQ_API_KEY=your_groq_api_key
+PINECONE_API_KEY=your_pinecone_api_key
+HF_TOKEN=your_huggingface_token
+COINGECKO_API_KEY=your_coingecko_api_key
 ```
 
-Never commit your `.env` file.
-
-The project includes a `.gitignore` that excludes environment variables and local virtual environments.
+> ⚠️ **Security Warning:** Never commit your `.env` file or API credentials. `.env` is ignored by `.gitignore`.
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation & Usage
 
-Clone the repository:
+### 1. Setup Environment
 
 ```bash
 git clone https://github.com/Rehan135236/Cryptomind-AI.git
 cd Cryptomind-AI
-```
 
-Create a virtual environment:
-
-```bash
 python -m venv .venv
-```
-
-Activate it on Windows:
-
-```powershell
+# On Windows:
 .venv\Scripts\Activate.ps1
-```
+# On macOS/Linux:
+source .venv/bin/activate
 
-Install dependencies:
-
-```bash
 pip install -r requirements.txt
 ```
 
-Configure environment variables:
-
-```env
-DATABASE_URL=your_postgresql_connection_string
-GROQ_API_KEY=your_groq_api_key
-```
-
----
-
-## ▶️ Running the Project
-
-Initialize the database:
+### 2. Run Data Pipeline & Database Setup
 
 ```powershell
+# Create database tables
 python -m src.database
-```
 
-Collect cryptocurrency data:
-
-```powershell
+# Run ETL pipeline to store historical market data
 python -m src.pipeline
+
+# Ingest research documents into Pinecone vector index
+python -m src.ingest_documents
 ```
 
-Run analytics:
+### 3. Run AI Research Agent (LangGraph)
 
 ```powershell
-python -m src.analytics
+python -m src.graph
 ```
 
-Run correlation analysis:
+Example prompt executed by the agent:
+> *"Give me the latest Bitcoin news and explain how Bitcoin has performed over the last 30 days."*
 
-```powershell
-python -m src.correlation
-```
-
-Run the FastAPI server:
+### 4. Run FastAPI Server
 
 ```powershell
 uvicorn src.api:app --reload
 ```
-
-API documentation:
-
-```text
-http://127.0.0.1:8000/docs
-```
+Access interactive documentation at `http://127.0.0.1:8000/docs`.
 
 ---
 
-## 🎯 Project Objective
+## 🎯 Target Objective & Use Cases
 
-CryptoMind is being developed as a portfolio project demonstrating practical experience across:
-
-* Data engineering
-* Data analytics
-* Backend development
-* API development
-* LLM applications
-* AI agents
-* Tool calling
-* Retrieval-Augmented Generation
-* Financial data analysis
-* PostgreSQL
-* Agent evaluation
-* Cloud-native development
-
-The project focuses on building an AI system that can **retrieve data, perform analysis, use tools, reason over results, and produce structured research outputs.**
+CryptoMind demonstrates end-to-end integration across data engineering, quantitative finance, vector databases, and multi-tool agent orchestration:
+* **Market Quantitative Intelligence**: Real analytical metrics replacing generic LLM estimates.
+* **Domain RAG Retrieval**: Accurate technical answers sourced strictly from ingested documentation.
+* **Agentic Multi-Tool Synthesis**: Automated correlation of market prices, news stories, and technical facts.
 
 ---
 
 ## ⚠️ Disclaimer
 
-CryptoMind is a technical research and analytics project.
-
-The information produced by the system is for educational and research purposes and should not be considered financial or investment advice.
+CryptoMind is an experimental technical research and analytics project built for demonstration purposes. Information generated by the system is strictly for educational and technical research and should not be used as financial or investment advice.
