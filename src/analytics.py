@@ -1,13 +1,21 @@
 import pandas as pd
+
 from .database import get_engine
 
+
+# ============================================================
+# GET CRYPTO DATA
+# ============================================================
 
 def get_crypto_data(symbol):
 
     engine = get_engine()
 
     query = """
-        SELECT date, symbol, price
+        SELECT
+            date,
+            symbol,
+            price
         FROM crypto_prices
         WHERE symbol = %(symbol)s
         ORDER BY date;
@@ -16,7 +24,9 @@ def get_crypto_data(symbol):
     df = pd.read_sql(
         query,
         engine,
-        params={"symbol": symbol}
+        params={
+            "symbol": symbol
+        }
     )
 
     engine.dispose()
@@ -24,100 +34,274 @@ def get_crypto_data(symbol):
     return df
 
 
+# ============================================================
+# CALCULATE CRYPTO METRICS
+# ============================================================
+
 def calculate_metrics(symbol):
 
-    df = get_crypto_data(symbol)
+    symbol = symbol.upper()
+
+    df = get_crypto_data(
+        symbol
+    )
 
     if df.empty:
         return None
 
-    # Moving averages
-    df["ma_7"] = df["price"].rolling(window=7).mean()
-    df["ma_30"] = df["price"].rolling(window=30).mean()
+    # --------------------------------------------------------
+    # PRICE MOVING AVERAGES
+    # --------------------------------------------------------
 
-    # Current price
-    current_price = df["price"].iloc[-1]
+    df["ma_7"] = (
+        df["price"]
+        .rolling(window=7)
+        .mean()
+    )
 
-    # Basic statistics
-    min_price = df["price"].min()
-    max_price = df["price"].max()
-    average_price = df["price"].mean()
+    df["ma_30"] = (
+        df["price"]
+        .rolling(window=30)
+        .mean()
+    )
 
-    # Latest moving averages
-    moving_average_7d = df["ma_7"].iloc[-1]
-    moving_average_30d = df["ma_30"].iloc[-1]
+    # --------------------------------------------------------
+    # BASIC PRICE STATISTICS
+    # --------------------------------------------------------
 
-    # 7-day return
+    current_price = (
+        df["price"].iloc[-1]
+    )
+
+    min_price = (
+        df["price"].min()
+    )
+
+    max_price = (
+        df["price"].max()
+    )
+
+    average_price = (
+        df["price"].mean()
+    )
+
+    moving_average_7d = (
+        df["ma_7"].iloc[-1]
+    )
+
+    moving_average_30d = (
+        df["ma_30"].iloc[-1]
+    )
+
+    # --------------------------------------------------------
+    # 7-DAY RETURN
+    # --------------------------------------------------------
+
     if len(df) >= 8:
 
-        price_7_days_ago = df["price"].iloc[-8]
+        price_7_days_ago = (
+            df["price"].iloc[-8]
+        )
 
         return_7d = (
-            (current_price - price_7_days_ago)
+            (
+                current_price
+                - price_7_days_ago
+            )
             / price_7_days_ago
         ) * 100
 
     else:
+
         return_7d = None
 
-    # 30-day return
-    if len(df) >= 31:
+    # --------------------------------------------------------
+    # DATABASE-PERIOD RETURN
+    # --------------------------------------------------------
+    #
+    # Instead of calling this "30-day return",
+    # calculate the actual period using the
+    # first and last observations.
+    #
+    # This avoids assuming that the database
+    # contains exactly 30 calendar days.
+    # --------------------------------------------------------
 
-        price_30_days_ago = df["price"].iloc[0]
+    first_price = (
+        df["price"].iloc[0]
+    )
 
-        return_30d = (
-            (current_price - price_30_days_ago)
-            / price_30_days_ago
-        ) * 100
+    return_period = (
+        (
+            current_price
+            - first_price
+        )
+        / first_price
+    ) * 100
 
-    else:
-        return_30d = None
+    period_start = (
+        df["date"].iloc[0]
+    )
 
-    # Daily percentage returns
-    df["daily_return"] = df["price"].pct_change()
+    period_end = (
+        df["date"].iloc[-1]
+    )
 
-    # Daily volatility
-    volatility = df["daily_return"].std()
+    period_days = (
+        period_end
+        - period_start
+    ).total_seconds() / 86400
 
-    # Maximum drawdown
-    df["running_peak"] = df["price"].cummax()
+    # --------------------------------------------------------
+    # DAILY RETURNS
+    # --------------------------------------------------------
+
+    df["daily_return"] = (
+        df["price"]
+        .pct_change()
+    )
+
+    # --------------------------------------------------------
+    # DAILY VOLATILITY
+    # --------------------------------------------------------
+    #
+    # Standard deviation of daily returns.
+    #
+    # This is NOT annualized volatility.
+    # --------------------------------------------------------
+
+    daily_volatility = (
+        df["daily_return"].std()
+    )
+
+    # --------------------------------------------------------
+    # MAXIMUM DRAWDOWN
+    # --------------------------------------------------------
+
+    df["running_peak"] = (
+        df["price"].cummax()
+    )
 
     df["drawdown"] = (
-        (df["price"] - df["running_peak"])
+        (
+            df["price"]
+            - df["running_peak"]
+        )
         / df["running_peak"]
     )
 
-    maximum_drawdown = df["drawdown"].min() * 100
+    maximum_drawdown = (
+        df["drawdown"].min()
+        * 100
+    )
 
-    # Sharpe ratio
-    if volatility != 0:
+    # --------------------------------------------------------
+    # DAILY SHARPE-LIKE RATIO
+    # --------------------------------------------------------
+    #
+    # This is based on daily returns and does
+    # NOT use annualization or a risk-free rate.
+    #
+    # Therefore we explicitly call it a
+    # daily Sharpe-like ratio.
+    # --------------------------------------------------------
 
-        sharpe_ratio = (
+    if daily_volatility != 0:
+
+        daily_sharpe_ratio = (
             df["daily_return"].mean()
-            / volatility
+            / daily_volatility
         )
 
     else:
-        sharpe_ratio = 0
 
-    # Return structured data
+        daily_sharpe_ratio = 0
+
+    # --------------------------------------------------------
+    # RETURN RESULTS
+    # --------------------------------------------------------
+
     return {
+
         "symbol": symbol,
-        "current_price": round(float(current_price), 2),
-        "average_price": round(float(average_price), 2),
-        "minimum_price": round(float(min_price), 2),
-        "maximum_price": round(float(max_price), 2),
-        "moving_average_7d": round(float(moving_average_7d), 2),
-        "moving_average_30d": round(float(moving_average_30d), 2),
-        "return_7d": round(float(return_7d), 2)
-        if return_7d is not None else None,
-        "return_30d": round(float(return_30d), 2)
-        if return_30d is not None else None,
-        "volatility": round(float(volatility * 100), 2),
-        "maximum_drawdown": round(float(maximum_drawdown), 2),
-        "sharpe_ratio": round(float(sharpe_ratio), 3)
+
+        "current_price": round(
+            float(current_price),
+            2
+        ),
+
+        "average_price": round(
+            float(average_price),
+            2
+        ),
+
+        "minimum_price": round(
+            float(min_price),
+            2
+        ),
+
+        "maximum_price": round(
+            float(max_price),
+            2
+        ),
+
+        "moving_average_7d": round(
+            float(moving_average_7d),
+            2
+        ),
+
+        "moving_average_30d": round(
+            float(moving_average_30d),
+            2
+        ),
+
+        "return_7d": round(
+            float(return_7d),
+            2
+        )
+        if return_7d is not None
+        else None,
+
+        "return_period": round(
+            float(return_period),
+            2
+        ),
+
+        "period_start": (
+            period_start.isoformat()
+        ),
+
+        "period_end": (
+            period_end.isoformat()
+        ),
+
+        "period_days": round(
+            float(period_days),
+            2
+        ),
+
+        "daily_volatility": round(
+            float(
+                daily_volatility * 100
+            ),
+            2
+        ),
+
+        "maximum_drawdown": round(
+            float(maximum_drawdown),
+            2
+        ),
+
+        "daily_sharpe_ratio": round(
+            float(daily_sharpe_ratio),
+            3
+        )
     }
 
+
+# ============================================================
+# COMPARE CRYPTOCURRENCIES
+# ============================================================
 
 def compare_cryptocurrencies(symbols):
 
@@ -125,15 +309,26 @@ def compare_cryptocurrencies(symbols):
 
     for symbol in symbols:
 
-        metrics = calculate_metrics(symbol)
+        metrics = calculate_metrics(
+            symbol
+        )
 
         if metrics:
-            results.append(metrics)
 
-    comparison = pd.DataFrame(results)
+            results.append(
+                metrics
+            )
+
+    comparison = pd.DataFrame(
+        results
+    )
 
     return comparison
 
+
+# ============================================================
+# TEST
+# ============================================================
 
 if __name__ == "__main__":
 
@@ -144,11 +339,15 @@ if __name__ == "__main__":
         "BNB"
     ]
 
-    comparison = compare_cryptocurrencies(
-        cryptocurrencies
+    comparison = (
+        compare_cryptocurrencies(
+            cryptocurrencies
+        )
     )
 
-    print("\nCrypto Comparison:\n")
+    print(
+        "\nCrypto Comparison:\n"
+    )
 
     print(
         comparison[
@@ -158,10 +357,13 @@ if __name__ == "__main__":
                 "moving_average_7d",
                 "moving_average_30d",
                 "return_7d",
-                "return_30d",
-                "volatility",
+                "return_period",
+                "period_days",
+                "daily_volatility",
                 "maximum_drawdown",
-                "sharpe_ratio"
+                "daily_sharpe_ratio"
             ]
-        ].to_string(index=False)
+        ].to_string(
+            index=False
+        )
     )
