@@ -343,7 +343,29 @@ LLM
 Grounded Answer
 ```
 
-The current document collection includes Ethereum information.
+The RAG knowledge base dynamically discovers, splits, embeds, and indexes factual technical documentation for **all 16 tracked cryptocurrencies**:
+
+* **Bitcoin** (`bitcoin.txt`)
+* **Ethereum** (`ethereum.txt`)
+* **BNB** (`binancecoin.txt`)
+* **Solana** (`solana.txt`)
+* **XRP** (`xrp.txt`)
+* **Cardano** (`cardano.txt`)
+* **Dogecoin** (`dogecoin.txt`)
+* **Avalanche** (`avalanche.txt`)
+* **TRON** (`tron.txt`)
+* **Chainlink** (`chainlink.txt`)
+* **Polkadot** (`polkadot.txt`)
+* **Litecoin** (`litecoin.txt`)
+* **Bitcoin Cash** (`bitcoin-cash.txt`)
+* **Uniswap** (`uniswap.txt`)
+* **Cosmos** (`cosmos.txt`)
+* **NEAR Protocol** (`near.txt`)
+
+### Ingestion Features:
+* **Dynamic Loader**: Automatically discovers any `.txt` document placed in `data/documents/`.
+* **Idempotent Ingestion**: Deterministic vector IDs (`{source}:chunk:{chunk_id}`) prevent duplicate vectors upon re-execution.
+* **Traceable Attribution**: Each document includes explicit source attribution to official whitepapers and technical documentation.
 
 The RAG system is designed to:
 
@@ -352,6 +374,7 @@ The RAG system is designed to:
 * Avoid hallucinating missing information
 * Return a clear insufficient-information response when necessary
 * Include document/source context
+
 
 ---
 
@@ -831,10 +854,12 @@ Failed: 0
 * VS Code
 * Jupyter
 
-## Planned Frontend
+## Frontend
 
-* React
-* Next.js
+* React 19
+* Next.js 16 (App Router, Turbopack)
+* Tailwind CSS
+* Lucide React Icons
 
 ## Planned Infrastructure
 
@@ -854,21 +879,24 @@ Failed: 0
 [x] Pandas Transformation
 [x] PostgreSQL
 [x] Crypto Analytics
-[x] FastAPI
+[x] FastAPI Production Hardening
+[x] Automated Market-Data Scheduling
 [x] LLM Integration
 [x] Tool Calling
 [x] LangChain
 [x] LangGraph
-[x] RAG
+[x] RAG 16-Asset Knowledge Base
+[x] Dynamic Document Loader & Idempotency
 [x] Crypto News
 [x] AI Research Agent
 [x] Structured Research Reports
-[x] Agent Evaluation
-[ ] React / Next.js Frontend
+[x] Agent Evaluation & Automated Tests
+[x] React / Next.js Frontend Dashboard
 [ ] Docker
 [ ] Production Deployment
 [ ] CI/CD
 ```
+
 
 ---
 
