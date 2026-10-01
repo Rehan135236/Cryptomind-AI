@@ -1,0 +1,15 @@
+Source: Dogecoin Open Source Repository and Dogecoin Foundation Documentation.
+
+Dogecoin (DOGE) is an open-source peer-to-peer cryptocurrency created in December 2013 by Billy Markus and Jackson Palmer as a lighthearted, meme-inspired digital currency based on the "Doge" Shiba Inu internet meme.
+
+Dogecoin was originally created as a fork of Luckycoin, which itself was a fork of Litecoin. Dogecoin operates on its own dedicated layer-1 blockchain utilizing the Scrypt hashing algorithm for Proof-of-Work (PoW) consensus.
+
+In 2014, Dogecoin implemented Auxiliary Proof-of-Work (AuxPoW), enabling merged mining with Litecoin. This allows Litecoin miners to mine Dogecoin simultaneously without consuming additional computational energy, securing the Dogecoin network.
+
+DOGE is primarily used as a tipping system, digital micro-payment currency, and peer-to-peer medium of exchange due to its fast 1-minute block confirmation times and negligible transaction fees.
+
+Unlike Bitcoin, Dogecoin has no hard cap on its total supply. The network emits a fixed block subsidy of 10,000 DOGE per block, resulting in a predictable annual inflation of 5 billion DOGE. This design encourages spending rather than long-term speculative hoarding.
+
+Dogecoin transactions require low network fees paid in DOGE. Dogecoin addresses start with the letter 'D' and use standard public/private key pairs.
+
+Key risks and limitations include an infinite inflationary supply model, lack of native smart contract functionality, vulnerability to speculative sentiment and social media volatility, and developer maintenance dependence.

@@ -1,0 +1,15 @@
+Source: Solana Whitepaper by Anatoly Yakovenko (2018) and Official Solana Documentation.
+
+Solana is a high-performance, open-source Layer 1 blockchain platform designed for scalable, low-latency decentralized applications and smart contract execution without relying on Layer 2 scaling solutions.
+
+Solana utilizes a novel consensus architecture combining Proof-of-History (PoH) with Proof-of-Stake (PoS). Proof-of-History is a cryptographic sequence of hashes that creates a verifiable, deterministic timestamp for transactions, enabling node operators to order transactions without waiting for global consensus agreement.
+
+The Solana network features a parallel transaction processing engine called Sealevel, which enables simultaneous execution of thousands of non-overlapping smart contract transactions. Tower BFT, a customized Byzantine Fault Tolerant consensus algorithm, works in tandem with PoH.
+
+SOL is the native utility token of the Solana network. It is used to pay transaction gas fees, execute smart contracts, stake to secure the network, and reward validator node operators.
+
+Solana has no hard cap on total supply. It launched with an initial inflation rate (around 8%), decreasing annually by 15% until reaching a long-term stable inflation rate of 1.5%. A portion of transaction fees (50%) is burned to offset token inflation.
+
+Transactions require SOL to pay micro-fractional gas fees. Users interact via Solana SPL (Solana Program Library) token addresses derived from Ed25519 cryptographic key pairs.
+
+Key risks and limitations include historical network outages and instability during extreme traffic, high hardware requirements for running validator nodes leading to validator concentration concerns, and complex state storage dynamics.

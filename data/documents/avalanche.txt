@@ -1,0 +1,18 @@
+Source: Avalanche Consensus Whitepaper by Emin Gün Sirer et al. (Ava Labs) and Official Avalanche Documentation.
+
+Avalanche is a smart contract platform designed for high throughput, sub-second finality, and custom blockchain network (subnet) deployments, created in 2020 by Emin Gün Sirer and Ava Labs.
+
+Avalanche utilizes a novel consensus protocol family based on repeated random subsampling. Instead of polling all validators, nodes repeatedly sample small random subsets of validators to reach rapid network agreement in under 1 second.
+
+The Avalanche Primary Network comprises three built-in blockchains:
+1. X-Chain (Exchange Chain): Manages asset creation and exchange using a Directed Acyclic Graph (DAG) UTXO model.
+2. P-Chain (Platform Chain): Coordinates validators, manages staking, and enables creation of custom application-specific subnets.
+3. C-Chain (Contract Chain): Executes Ethereum Virtual Machine (EVM) smart contracts using an account model.
+
+AVAX is the native utility token of Avalanche. It is used to pay transaction gas fees across the primary network, secure the network via Proof-of-Stake validator and delegator staking, and serve as a common accounting unit for subnets.
+
+AVAX has a maximum capped supply of 720 million AVAX. Half of the supply (360 million) was minted at launch, while the remainder is issued as staking rewards. All transaction fees across X-Chain, P-Chain, and C-Chain are burned, creating deflationary pressure during high usage.
+
+C-Chain uses standard Ethereum-compatible 0x addresses, while X-Chain and P-Chain use Avalanche-formatted Bech32 addresses.
+
+Key risks and limitations include complex multi-chain architecture maintenance, minimum validator staking requirement thresholds (2,000 AVAX), and competition among L1 and L2 scaling solutions.

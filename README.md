@@ -555,6 +555,59 @@ API documentation is available through FastAPI's automatic documentation interfa
 
 ---
 
+# 🔄 Market Data Ingestion & Scheduling Architecture
+
+CryptoMind includes an automated, production-hardened market-data ingestion worker powered by `APScheduler` and PostgreSQL `ON CONFLICT` upserts.
+
+```text
+              ┌─────────────────┐
+              │    CoinGecko    │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Ingestion Worker│
+              │   Scheduler     │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Data Validation │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ PostgreSQL/Neon │
+              └────────┬────────┘
+                       │
+             ┌─────────┴─────────┐
+             ▼                   ▼
+         FastAPI             AI Research
+             │
+             ▼
+         Next.js
+```
+
+### Key Features
+- **Idempotent Ingestion**: PostgreSQL `UNIQUE(symbol, date)` constraint and `ON CONFLICT (symbol, date) DO UPDATE` logic prevent duplicate rows.
+- **Run Observability**: Ingestion run statistics (`assets_attempted`, `assets_succeeded`, `assets_failed`, `records_inserted`, `records_updated`, `duration_ms`) recorded in `ingestion_runs` table.
+- **Data Freshness**: Exposed operational endpoint `GET /ingestion/status` provides live scheduler state, last run metadata, and data freshness calculations (`latest_timestamp`, `age_minutes`, `is_fresh`).
+- **Overlapping Run Protection**: Thread-safe in-process execution locks ensure concurrent ingestion cycles cannot overlap.
+- **Environment Configuration**:
+  ```env
+  INGESTION_ENABLED=true
+  INGESTION_INTERVAL_MINUTES=60
+  INGESTION_RUN_ON_STARTUP=false
+  ```
+- **Manual Execution CLI**:
+  ```powershell
+  python -m src.pipeline
+  # or
+  python -m src.ingest_tracked_assets
+  ```
+
+---
+
 # 📁 Project Structure
 
 ```text

@@ -1,0 +1,15 @@
+Source: Bitcoin Whitepaper ("Bitcoin: A Peer-to-Peer Electronic Cash System" by Satoshi Nakamoto, 2008) and Bitcoin.org Documentation.
+
+Bitcoin is a decentralized peer-to-peer electronic cash system and digital asset created in 2008 by Satoshi Nakamoto. Unlike traditional fiat currencies controlled by central banks and governments, Bitcoin operates on an open, permissionless, decentralized network without central intermediaries or single points of failure.
+
+Bitcoin relies on a distributed public ledger known as a blockchain. Transactions are broadcast across a peer-to-peer network of node operators who independently verify transaction validity, recording confirmed transactions chronologically in immutable cryptographic blocks. Bitcoin uses an Unspent Transaction Output (UTXO) model to track ownership and balances.
+
+Network consensus and security are maintained through Proof-of-Work (PoW). Miners utilize computational energy to solve hard SHA-256 cryptographic puzzles. The first miner to find a valid hash for a candidate block earns the right to add the block to the blockchain and receives the block reward consisting of newly minted Bitcoin plus transaction fees.
+
+Bitcoin has a strictly capped maximum supply of 21 million BTC written into its protocol rules. New Bitcoins enter circulation solely through block rewards. Every 210,000 blocks (approximately every four years), the protocol undergoes a "halving" event that cuts the miner block subsidy in half, creating predictable algorithmic scarcity. The smallest unit of Bitcoin is a Satoshi (1 BTC = 100,000,000 satoshis).
+
+User funds are secured using asymmetric cryptography. A Bitcoin wallet manages public and private key pairs. Public keys derive public Bitcoin addresses used to receive funds. Private keys generate digital signatures required to authorize outgoing transactions. Anyone who holds the private key controls the associated funds, making self-custody and private key management critical.
+
+Bitcoin transaction fees are determined by network congestion and transaction byte size rather than the transaction value amount. Users pay fees in BTC to incentivize miners to prioritize their transactions in the next block.
+
+Key risks and limitations of Bitcoin include severe price volatility, regulatory changes across jurisdictions, network scalability throughput constraints on the base layer, irreversible transactions where lost private keys mean permanent asset loss, and environmental concerns regarding energy consumption in Proof-of-Work mining.

@@ -1,0 +1,18 @@
+Source: Uniswap Protocol Whitepapers (v1, v2, v3, v4) by Hayden Adams et al. and Official Uniswap Documentation.
+
+Uniswap is a leading decentralized exchange (DEX) protocol built on the Ethereum blockchain, created in November 2018 by Hayden Adams.
+
+Uniswap pioneered the Automated Market Maker (AMM) model for cryptocurrency trading. Instead of traditional central limit order books, Uniswap relies on liquidity pools funded by liquidity providers (LPs).
+
+Key protocol versions and innovations include:
+1. Uniswap v1 / v2: Introduced ERC-20 to ERC-20 trading pools governed by the constant product automated market maker formula: x * y = k (where x and y represent asset reserves and k is a constant).
+2. Uniswap v3: Introduced Concentrated Liquidity, allowing LPs to allocate capital within customized price ranges, dramatically increasing capital efficiency and reducing trade slippage.
+3. Uniswap v4: Introduced a singleton contract architecture and custom plugin "Hooks" enabling dynamic fees, on-chain limit orders, and custom LP strategies.
+
+UNI is the native ERC-20 governance token of the Uniswap protocol, launched in September 2020. UNI holders govern the Uniswap DAO treasury, vote on protocol fee switches, approve grant allocations, and manage cross-chain deployments.
+
+UNI has a fixed initial total supply cap of 1,000,000,000 UNI tokens distributed over 4 years to community members, team members, investors, and advisors. A 2% annual inflation rate begins after year 4 to ensure ongoing participation incentives.
+
+Trading fees are collected in target tokens and distributed directly to active liquidity providers. Swapping tokens on Uniswap requires Ethereum network gas fees paid in ETH.
+
+Key risks and limitations include impermanent loss risk for liquidity providers during volatile price divergence, smart contract exploit risks, and regulatory scrutiny regarding decentralized exchange interfaces.

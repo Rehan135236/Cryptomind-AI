@@ -1,23 +1,29 @@
-from database import get_connection
+try:
+    from .database import get_db_connection
+except ImportError:
+    from database import get_db_connection
 
 
 def add_unique_constraint():
 
-    connection = get_connection()
-    cursor = connection.cursor()
+    with get_db_connection() as connection:
+        cursor = connection.cursor()
 
-    cursor.execute("""
-        ALTER TABLE crypto_prices
-        ADD CONSTRAINT unique_crypto_date_symbol
-        UNIQUE (date, symbol);
-    """)
+        cursor.execute("""
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1 FROM pg_constraint WHERE conname = 'unique_crypto_symbol_date'
+                ) THEN
+                    ALTER TABLE crypto_prices
+                    ADD CONSTRAINT unique_crypto_symbol_date UNIQUE (symbol, date);
+                END IF;
+            END $$;
+        """)
 
-    connection.commit()
+        cursor.close()
 
-    cursor.close()
-    connection.close()
-
-    print("Unique constraint added successfully!")
+    print("Unique constraint verified successfully!")
 
 
 if __name__ == "__main__":

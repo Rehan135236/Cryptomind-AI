@@ -1,0 +1,17 @@
+Source: Bitcoin Cash Technical Specification and Bitcoincash.org Documentation.
+
+Bitcoin Cash (BCH) is a peer-to-peer electronic cash system created on August 1, 2017, as a result of a hard fork from the original Bitcoin blockchain network.
+
+Bitcoin Cash emerged from the "Blocksize War" debate within the Bitcoin community regarding transaction scalability. While Bitcoin prioritized off-chain Layer 2 scaling (such as Lightning Network) and Segregated Witness (SegWit), Bitcoin Cash advocated for on-chain scaling by increasing the block size limit from 1MB to 8MB initially, and subsequently up to 32MB+.
+
+Larger block capacity allows Bitcoin Cash to process significantly more transactions per second on the base layer, keeping transaction fees at sub-cent levels and enabling micro-transactions.
+
+Bitcoin Cash uses SHA-256 Proof-of-Work (PoW) consensus, sharing the same mining algorithm as Bitcoin. It employs an automated Difficulty Adjustment Algorithm (ASERT DAA) to dynamically adjust mining difficulty after every block.
+
+BCH has a fixed total maximum supply cap of 21 million BCH, mirroring Bitcoin's hard cap and 4-year halving schedule (every 210,000 blocks).
+
+Bitcoin Cash supports CashTokens, an on-chain tokenization standard that enables native tokens and light smart contract functionality directly on the BCH Layer 1 blockchain.
+
+BCH wallets use CashAddr format addresses (starting with 'bitcoincash:q...'), preventing accidental transfers between BTC and BCH addresses.
+
+Key risks and limitations include lower hash rate security compared to Bitcoin (making it more vulnerable to potential 51% mining attacks), lower institutional adoption, and ongoing community fragmentation.

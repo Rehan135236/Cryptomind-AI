@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --background: #050507;
+  --foreground: #f5f5f5;
+
+  --lime: #c6ff00;
+  --cyan: #00e5ff;
+
+  --surface: #08080b;
+  --surface-soft: rgba(255, 255, 255, 0.035);
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.06);
+
+  --muted: rgba(255, 255, 255, 0.45);
+  --muted-soft: rgba(255, 255, 255, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* -------------------------------- */
+/* Typography                       */
+/* -------------------------------- */
+
+.font-display {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* -------------------------------- */
+/* Selection                        */
+/* -------------------------------- */
+
+::selection {
+  background: rgba(198, 255, 0, 0.25);
+  color: white;
+}
+
+/* -------------------------------- */
+/* Scrollbar                        */
+/* -------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050507;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* -------------------------------- */
+/* Glass                            */
+/* -------------------------------- */
+
+.glass {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-soft {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* -------------------------------- */
+/* Gradients                        */
+/* -------------------------------- */
+
+.gradient-lime-cyan {
+  background:
+    radial-gradient(80% 80% at 15% 0%,
+      rgba(198, 255, 0, 0.1),
+      transparent 55%),
+    radial-gradient(80% 80% at 90% 90%,
+      rgba(0, 229, 255, 0.1),
+      transparent 55%);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg,
+      #c6ff00 0%,
+      #e8ff8a 45%,
+      #00e5ff 100%);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* -------------------------------- */
+/* Glow                             */
+/* -------------------------------- */
+
+.glow-lime {
+  box-shadow:
+    0 0 20px rgba(198, 255, 0, 0.12),
+    0 0 60px rgba(198, 255, 0, 0.05);
+}
+
+.glow-cyan {
+  box-shadow:
+    0 0 20px rgba(0, 229, 255, 0.12),
+    0 0 60px rgba(0, 229, 255, 0.05);
+}
+
+/* -------------------------------- */
+/* Background grid                  */
+/* -------------------------------- */
+
+.grid-background {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px),
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px);
+
+  background-size: 48px 48px;
+}
+
+/* -------------------------------- */
+/* Ambient lights                   */
+/* -------------------------------- */
+
+.ambient-lime {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 9999px;
+  background: rgba(198, 255, 0, 0.045);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.ambient-cyan {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 9999px;
+  background: rgba(0, 229, 255, 0.045);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+/* -------------------------------- */
+/* Animations                       */
+/* -------------------------------- */
+
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* -------------------------------- */
+/* Focus                            */
+/* -------------------------------- */
+
+:focus-visible {
+  outline: 2px solid rgba(198, 255, 0, 0.7);
+  outline-offset: 3px;
+}
+
+/* -------------------------------- */
+/* Recharts                         */
+/* -------------------------------- */
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.05);
+}
+
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+/* -------------------------------- */
+/* Mobile                           */
+/* -------------------------------- */
+
+@media (max-width: 768px) {
+  .grid-background {
+    background-size: 32px 32px;
+  }
+
+  .ambient-lime,
+  .ambient-cyan {
+    width: 300px;
+    height: 300px;
+  }
+}

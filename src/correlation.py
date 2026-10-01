@@ -18,12 +18,10 @@ def get_all_crypto_data():
         engine
     )
 
-    engine.dispose()
-
     return df
 
 
-def calculate_correlation():
+def calculate_correlation(symbols=None):
 
     df = get_all_crypto_data()
 
@@ -33,6 +31,11 @@ def calculate_correlation():
         columns="symbol",
         values="price"
     )
+
+    if symbols:
+        available = [s for s in symbols if s in price_data.columns]
+        if available:
+            price_data = price_data[available]
 
     # Calculate daily percentage returns
     returns = price_data.pct_change(

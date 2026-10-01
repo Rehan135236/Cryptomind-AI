@@ -1,0 +1,15 @@
+Source: XRP Ledger Consensus Protocol Whitepaper and Ripple Technical Documentation.
+
+XRP is the native digital asset of the XRP Ledger (XRPL), an open-source, public, decentralized blockchain created in 2012 by David Schwartz, Jed McCaleb, and Arthur Britto to facilitate fast, low-cost cross-border payments and currency transfers.
+
+Unlike Bitcoin or Ethereum, the XRP Ledger does not use Proof-of-Work or Proof-of-Stake consensus. Instead, it employs the XRP Ledger Consensus Protocol, a Federated Byzantine Agreement (FBA) network. A set of independent validating nodes (Unique Node Lists or UNLs) aggregate and reach agreement on transaction ordering every 3 to 5 seconds.
+
+XRP functions as a bridge currency for cross-border liquidity and fiat currency settlement, allowing financial institutions and users to transfer value internationally in seconds without pre-funding nostro/vostro accounts.
+
+The total maximum supply of XRP is capped at 100 billion tokens, all created at ledger inception. A significant portion of XRP supply is held in cryptographic escrow accounts by Ripple Labs, released periodically according to pre-programmed schedules.
+
+XRPL transactions require a small fractional burn of XRP as a transaction fee (destroying a fraction of a drop, where 1 XRP = 1,000,000 drops) to prevent transaction spamming.
+
+XRPL addresses use Base58 encoding (starting with 'r') with cryptographic key pairs. Destination tags are frequently used to route payments on centralized exchanges.
+
+Key risks and limitations include historical legal disputes regarding regulatory classification as a security, reliance on default UNL lists for network consensus coordination, and concentrated token holdings in corporate escrow accounts.

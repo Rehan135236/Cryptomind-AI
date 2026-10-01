@@ -1,0 +1,17 @@
+Source: Cosmos Whitepaper by Jae Kwon & Ethan Buchman (2016) and Official Cosmos Network Documentation.
+
+Cosmos is a decentralized ecosystem of independent, sovereign, interoperable Layer 1 blockchains known as the "Internet of Blockchains," founded by Jae Kwon and Ethan Buchman in 2014 and launched in 2019 under Interchain Foundation stewardship.
+
+Instead of forcing all smart contracts to compete for resources on a single monolithic blockchain, Cosmos enables developers to build custom application-specific blockchains ("AppChains") using the Cosmos SDK framework.
+
+Core architectural components include:
+1. Tendermint Core (CometBFT): A high-performance Byzantine Fault Tolerant (BFT) Proof-of-Stake consensus engine providing instant 1-second block finality.
+2. Cosmos SDK: A modular framework for building custom blockchains in Go.
+3. IBC (Inter-Blockchain Communication): An open-source protocol for secure, trust-minimized cross-chain state and asset transfers across Cosmos chains.
+4. Cosmos Hub: The flagship hub blockchain securing the network and routing inter-chain transactions.
+
+ATOM is the native utility, staking, and governance token of the Cosmos Hub. ATOM is used to secure the Cosmos Hub via Proof-of-Stake validation, participate in governance proposals, pay hub transaction gas fees, and provide shared economic security (Interchain Security) to consumer chains.
+
+ATOM has an inflationary supply model. The annual inflation rate dynamically adjusts between 7% and 20% based on the percentage of total ATOM staked across the network to incentivize target staking participation (67%).
+
+Key risks and limitations include value capture challenges for ATOM (since independent Cosmos chains issue their own native tokens without requiring ATOM for local gas), governance fragmentation, and competition from alternative interoperability frameworks.

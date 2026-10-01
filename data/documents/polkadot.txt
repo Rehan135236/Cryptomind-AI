@@ -1,0 +1,19 @@
+Source: Polkadot Whitepaper by Dr. Gavin Wood (2016) and Web3 Foundation / Polkadot Wiki Documentation.
+
+Polkadot is a heterogeneous multi-chain network architecture founded in 2020 by Dr. Gavin Wood (co-founder of Ethereum) and developed by Parity Technologies and the Web3 Foundation.
+
+Polkadot connects multiple specialized application-specific blockchains called parachains into a single unified network, allowing them to share security, scale processing, and interoperate seamlessly.
+
+The network architecture consists of:
+1. Relay Chain: The central blockchain coordinating network consensus, shared security, cross-chain communication, and governance.
+2. Parachains: Independent Layer 1 blockchains with customized logic and tokens that rent security from the Relay Chain.
+3. Bridges: Specialized connections enabling Polkadot parachains to communicate with external networks like Bitcoin and Ethereum.
+4. XCM (Cross-Consensus Messaging): A universal format allowing parachains to exchange arbitrary messages, tokens, and smart contract calls.
+
+Polkadot uses Nominated Proof-of-Stake (NPoS) consensus. Nominators select trustworthy validators to validate Relay Chain transactions and finalize blocks using the GRANDPA finality gadget.
+
+DOT is the native utility and governance token of Polkadot. DOT is used for network governance voting (OpenGov), staking to secure the Relay Chain, and bonding tokens to secure parachain slots.
+
+DOT has an inflationary supply model with an annual inflation rate of approximately 10%, designed to incentivize NPoS staking participation. Staking rewards offset inflation for active participants.
+
+Key risks and limitations include complex parachain onboarding dynamics, Relay Chain smart contract execution constraints (smart contracts run on parachains rather than Relay Chain), and steep ecosystem learning curves.

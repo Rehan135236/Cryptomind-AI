@@ -1,0 +1,17 @@
+Source: Chainlink Whitepaper v2 by Sergey Nazarov et al. and Official Chainlink Documentation.
+
+Chainlink is a decentralized oracle network founded in 2017 by Sergey Nazarov and Steve Ellis that securely connects smart contracts on any blockchain to off-chain real-world data, web APIs, legacy payment systems, and external computation.
+
+Smart contracts on blockchains cannot natively access off-chain data due to isolated execution environments. Chainlink solves this "oracle problem" using a decentralized network of independent node operators that retrieve, aggregate, and cryptographically verify data before delivering it to smart contracts.
+
+Key Chainlink products and protocols include:
+1. Chainlink Data Feeds: High-fidelity price and market data feeds powering decentralized finance (DeFi).
+2. Chainlink CCIP (Cross-Chain Interoperability Protocol): A secure cross-chain messaging standard enabling cross-chain token transfers and smart contract calls.
+3. Chainlink Functions: Serverless off-chain computation connecting smart contracts to any web API.
+4. Chainlink VRF (Verifiable Random Function): Cryptographically provable random number generation for gaming and NFTs.
+
+LINK is the native ERC-20 / ERC-677 utility token of the Chainlink network. It is used to compensate node operators for retrieving data and performing off-chain computation, and serves as collateral in Chainlink Staking to enhance oracle economic security.
+
+Chainlink has a fixed total maximum supply cap of 1,000,000,000 LINK tokens. Tokens were distributed across token sales, node operator incentives, and parent company reserves.
+
+Key risks and limitations include dependence of external DeFi protocols on Chainlink price feed integrity, competition from alternative oracle networks, and token concentration in ecosystem development reserves.

@@ -1,0 +1,16 @@
+Source: Litecoin Open Source Project and Litecoin Foundation Documentation.
+
+Litecoin (LTC) is an open-source peer-to-peer cryptocurrency created in October 2011 by Charlie Lee, a former Google engineer. Designed as a lightweight fork of the Bitcoin codebase, Litecoin was created to serve as a fast, low-cost medium for daily global payments—often referred to as "the silver to Bitcoin's gold."
+
+Litecoin shares Bitcoin's fundamental architecture but incorporates key technical modifications:
+1. Block Time: Litecoin produces blocks every 2.5 minutes (four times faster than Bitcoin's 10-minute target), enabling faster transaction confirmation times.
+2. Hashing Algorithm: Litecoin uses the Scrypt hashing algorithm for Proof-of-Work (PoW) consensus, which was originally memory-intensive to prevent ASIC dominance before dedicated Scrypt ASICs emerged.
+3. Supply Cap: Total maximum supply is capped at 84 million LTC (four times Bitcoin's 21 million limit).
+
+Like Bitcoin, Litecoin emission follows a halving schedule. Every 840,000 blocks (roughly every four years), the miner block reward is halved until the 84 million cap is reached.
+
+In 2022, Litecoin activated MimbleWimble Extension Blocks (MWEB), an optional privacy upgrade allowing users to perform confidential transactions that conceal transfer amounts and wallet balances.
+
+Litecoin addresses use Base58 or Bech32 encoding ('L...', 'M...', or 'ltc1...'). Transactions require low network fees paid in LTC.
+
+Key risks and limitations include regulatory scrutiny over MWEB privacy features (resulting in delistings on select strict regional exchanges), competition from Layer 2 payment networks, and reliance on Proof-of-Work mining security.

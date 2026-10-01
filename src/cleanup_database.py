@@ -1,27 +1,27 @@
-from database import get_connection
+try:
+    from .database import get_db_connection
+except ImportError:
+    from database import get_db_connection
 
 
 def cleanup_duplicates():
 
-    connection = get_connection()
-    cursor = connection.cursor()
+    with get_db_connection() as connection:
+        cursor = connection.cursor()
 
-    cursor.execute("""
-        DELETE FROM crypto_prices a
-        USING crypto_prices b
-        WHERE a.id > b.id
-        AND a.date = b.date
-        AND a.symbol = b.symbol;
-    """)
+        cursor.execute("""
+            DELETE FROM crypto_prices a
+            USING crypto_prices b
+            WHERE a.id > b.id
+            AND a.date = b.date
+            AND a.symbol = b.symbol;
+        """)
 
-    deleted_rows = cursor.rowcount
-
-    connection.commit()
-
-    cursor.close()
-    connection.close()
+        deleted_rows = cursor.rowcount
+        cursor.close()
 
     print(f"Deleted {deleted_rows} duplicate records.")
+    return deleted_rows
 
 
 if __name__ == "__main__":

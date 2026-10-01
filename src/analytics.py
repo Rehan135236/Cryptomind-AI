@@ -29,9 +29,36 @@ def get_crypto_data(symbol):
         }
     )
 
-    engine.dispose()
-
     return df
+
+
+# ============================================================
+# GET HISTORICAL PRICES
+# ============================================================
+
+def get_historical_prices(symbol):
+
+    symbol = symbol.upper()
+
+    df = get_crypto_data(
+        symbol
+    )
+
+    if df.empty:
+        return []
+
+    historical_prices = []
+
+    for _, row in df.iterrows():
+
+        historical_prices.append(
+            {
+                "date": row["date"].isoformat(),
+                "price": float(row["price"])
+            }
+        )
+
+    return historical_prices
 
 
 # ============================================================

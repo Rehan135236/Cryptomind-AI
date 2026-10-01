@@ -1,0 +1,17 @@
+Source: Cardano Ouroboros Consensus Whitepaper by IOHK and Official Cardano Documentation.
+
+Cardano is a proof-of-stake Layer 1 blockchain platform founded in 2017 by Charles Hoskinson and developed by Input Output Global (IOG/IOHK). Cardano is designed through peer-reviewed scientific research and formal methods verification.
+
+Cardano uses the Ouroboros consensus protocol, a provably secure Proof-of-Stake mechanism. Time is divided into epochs (5-day periods) and slots (1-second intervals). Slot leaders are randomly selected from ADA stakers to produce blocks.
+
+Cardano features a dual-layer architecture: the Cardano Settlement Layer (CSL) manages ADA transactions and account balances, while the Cardano Computation Layer (CCL) executes smart contracts via the Plutus smart contract programming language.
+
+Cardano utilizes an Extended UTXO (eUTXO) data model, extending Bitcoin's UTXO model to allow arbitrary smart contract state execution in deterministically predictable transaction environments.
+
+ADA is the native cryptocurrency of Cardano, named after mathematician Ada Lovelace. ADA is used to pay transaction gas fees, participate in staking and delegation, and vote on protocol upgrades through Project Catalyst governance.
+
+Cardano has a fixed maximum supply cap of 45 billion ADA. The remaining unissued supply is distributed incrementally as staking rewards and treasury allocations.
+
+ADA wallets use Bech32-encoded addresses ('addr1...'). Staking does not require locking or slashing funds, preserving user liquidity.
+
+Key risks and limitations include slower development pacing due to formal academic review processes, lower initial decentralized exchange throughput due to eUTXO concurrency management, and competition among Layer 1 smart contract platforms.

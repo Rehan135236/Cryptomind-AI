@@ -1,0 +1,15 @@
+Source: BNB Chain Documentation and Official Whitepaper.
+
+BNB (Binance Coin) is the native utility, gas, and governance token of the BNB Chain ecosystem, originally launched by Binance in 2017 as an ERC-20 token before migrating to its native blockchains.
+
+The BNB Chain architecture comprises BNB Smart Chain (BSC), an Ethereum Virtual Machine (EVM) compatible smart contract platform, and BNB Greenfield, a decentralized storage network. BSC operates alongside the original BNB Beacon Chain (which is being merged into BSC).
+
+BSC achieves consensus using Proof-of-Staked Authority (PoSA), combining Proof-of-Stake with Proof-of-Authority. A set of 21 to 45 active validators stake BNB and validate transactions, delivering fast block times (around 3 seconds) and low transaction fees.
+
+BNB serves multiple functions: paying transaction fees (gas) on BSC, participating in network staking and governance, delegating to validators, and serving as a settlement medium within decentralized finance (DeFi) protocols and ecosystem applications.
+
+BNB has an initial total supply cap of 200 million BNB, designed to reduce over time through an automated quarterly burn mechanism (BNB Auto-Burn) and real-time BEP-95 gas burning until the circulating supply reaches 100 million BNB.
+
+Transactions require BNB to cover network gas fees. BNB wallets utilize standard cryptographic key pairs (BEP-20 address format compatible with Ethereum addresses).
+
+Key risks and limitations include validator set centralization compared to larger permissionless networks, regulatory scrutiny surrounding its historical association with Binance, and potential network congestion during high transaction volume periods.

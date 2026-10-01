@@ -1,0 +1,17 @@
+Source: NEAR Protocol Technical Whitepaper by Illia Polosukhin & Alexander Skidanov and Official NEAR Documentation.
+
+NEAR Protocol is a high-performance Layer 1 blockchain platform designed to provide a developer- and user-friendly environment for decentralized applications (dApps), founded in 2020 by Illia Polosukhin and Alexander Skidanov.
+
+NEAR utilizes a novel horizontal scaling architecture called Nightshade sharding. Unlike traditional sharded networks, Nightshade shards individual blocks into "chunks," allowing the network to scale throughput linearly as validator demand increases without sacrificing security.
+
+NEAR employs a customized Proof-of-Stake consensus mechanism called Doomslug, which enables blocks to achieve practical finality within seconds, preventing network delays.
+
+A key user-experience innovation of NEAR is human-readable account names (e.g., `user.near` instead of complex 40-character hexadecimal public keys), built-in access keys for granular permissions, and account abstraction features.
+
+NEAR is the native utility token of the NEAR Protocol. It is used to pay transaction processing and data storage fees, participate in Proof-of-Stake validator staking, and vote on governance proposals.
+
+NEAR has an annual inflation rate of 5%, issued to compensate validator stakers. To offset inflation, 30% of all transaction gas fees are burned, while the remaining 70% is rewarded to smart contract developers whose contracts generated the transaction activity.
+
+NEAR transactions require fractional gas fees paid in NEAR. Storage staking requires holding a fixed amount of NEAR per kilobyte of state storage used on-chain.
+
+Key risks and limitations include ongoing implementation of multi-phase Nightshade sharding roadmap milestones, competition from EVM and SVM layer 1 networks, and marketing/ecosystem developer acquisition challenges.

@@ -1,0 +1,17 @@
+Source: TRON Developer Documentation and TRON Architecture Whitepaper.
+
+TRON is a decentralized, open-source blockchain platform founded in 2017 by Justin Sun and managed by the TRON DAO, optimized for high-throughput digital content sharing, smart contracts, and stablecoin transactions.
+
+TRON operates on a Delegated Proof-of-Stake (DPoS) consensus mechanism. The network is secured by 27 elected block producers known as Super Representatives (SRs), who are voted in by TRX token holders every 6 hours to validate transactions and produce blocks every 3 seconds.
+
+TRON executes smart contracts through the TRON Virtual Machine (TVM), an EVM-compatible execution engine that allows Ethereum developers to deploy smart contracts using Solidity.
+
+TRX (Tronix) is the native cryptocurrency of TRON. TRX is used to vote for Super Representatives, pay network transaction fees, freeze tokens to obtain network bandwidth and energy resources, and participate in TRC-20 token ecosystem operations.
+
+TRON utilizes a resource-allocation model based on Bandwidth and Energy. Freezing TRX provides users with Bandwidth (for basic transactions) and Energy (for smart contract execution), eliminating gas fees for users who maintain sufficient resource balances. If resources are insufficient, TRX is burned to pay fee costs.
+
+TRON is the largest network by circulating volume for Tether (USDT) issuance via the TRC-20 token standard, serving as a widespread global payment infrastructure.
+
+TRX token supply is dynamic: new TRX is generated to reward Super Representatives, while TRX is burned through resource consumption and fee burns, creating periods of net deflation.
+
+Key risks and limitations include validator centralization (reliance on 27 Super Representatives), regulatory scrutiny regarding leadership and token distribution, and reliance on stablecoin transaction volumes.
