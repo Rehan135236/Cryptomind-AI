@@ -1,4 +1,4 @@
-Source: Polkadot Whitepaper by Dr. Gavin Wood (2016) and Web3 Foundation / Polkadot Wiki Documentation.
+﻿Source: Polkadot Whitepaper by Dr. Gavin Wood (2016) and Web3 Foundation / Polkadot Wiki Documentation.
 
 Polkadot is a heterogeneous multi-chain network architecture founded in 2020 by Dr. Gavin Wood (co-founder of Ethereum) and developed by Parity Technologies and the Web3 Foundation.
 

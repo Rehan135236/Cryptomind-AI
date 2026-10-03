@@ -1,4 +1,4 @@
-try:
+﻿try:
     from .database import get_db_connection
 except ImportError:
     from database import get_db_connection

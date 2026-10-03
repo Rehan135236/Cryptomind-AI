@@ -854,18 +854,104 @@ Failed: 0
 * VS Code
 * Jupyter
 
-## Frontend
+## Containerization
 
-* React 19
-* Next.js 16 (App Router, Turbopack)
-* Tailwind CSS
-* Lucide React Icons
+* Docker
+* Docker Compose (v2/v5+)
+* Multi-stage Next.js Docker builds
+* Non-root container security
 
 ## Planned Infrastructure
 
-* Docker
 * Cloud deployment
 * CI/CD
+
+---
+
+# 🐳 Docker & Containerization
+
+CryptoMind provides a production-style, containerized multi-service setup using Docker and Docker Compose.
+
+```text
+ ┌────────────────────────────────────────────────────────┐
+ │                   Docker Network                       │
+ │                                                        │
+ │  ┌─────────────────────┐      ┌─────────────────────┐  │
+ │  │  cryptomind-frontend│      │  cryptomind-backend │  │
+ │  │  (Next.js 16)       │      │  (FastAPI)          │  │
+ │  │  Port 3000          │      │  Port 8000          │  │
+ │  └──────────┬──────────┘      └──────────┬──────────┘  │
+ └─────────────┼────────────────────────────┼─────────────┘
+               │                            │
+               ▼                            ▼
+        User Browser               External Services
+    (http://localhost:3000)     (Neon PostgreSQL, Pinecone,
+                                 Groq LLM, CoinGecko API)
+```
+
+### Prerequisites
+- Docker Engine 24.0+ / Docker Desktop
+- Docker Compose v2.0+
+
+### Environment Setup
+Create a `.env` file from the template before starting containers:
+
+```powershell
+copy .env.example .env
+```
+
+Ensure `.env` contains valid credentials (`DATABASE_URL`, `GROQ_API_KEY`, `HF_TOKEN`, `PINECONE_API_KEY`). Secrets are automatically passed to containers and never embedded into image layers.
+
+### Build & Startup Commands
+Build and start all services in detached mode:
+
+```powershell
+docker compose up --build -d
+```
+
+### Accessing Applications & Health Checks
+- **Frontend App**: `http://localhost:3000`
+- **Backend API**: `http://localhost:8000`
+- **API Documentation**: `http://localhost:8000/docs`
+- **Backend Health Endpoint**: `http://localhost:8000/health`
+- **Database Health Endpoint**: `http://localhost:8000/health/db`
+- **Ingestion Scheduler Status**: `http://localhost:8000/ingestion/status`
+
+### Stopping Containers
+Stop all running CryptoMind containers:
+
+```powershell
+docker compose down
+```
+
+To stop containers and remove volumes:
+
+```powershell
+docker compose down -v
+```
+
+### Viewing Container Logs
+View live aggregated logs across all services:
+
+```powershell
+docker compose logs -f
+```
+
+View backend container logs only:
+
+```powershell
+docker compose logs -f backend
+```
+
+### Troubleshooting Common Docker Issues
+1. **Container fails to start due to missing environment variables**:
+   Verify `.env` exists in the project root and contains `DATABASE_URL` and `GROQ_API_KEY`.
+2. **CORS errors when accessing backend from frontend**:
+   Ensure `CORS_ALLOWED_ORIGINS` in `.env` includes `http://localhost:3000`.
+3. **Database connection failures**:
+   Verify outbound internet access from Docker containers for Neon PostgreSQL cloud connectivity (`sslmode=require`).
+4. **Port 3000 or 8000 already in use**:
+   Stop any local uvicorn or next dev servers running natively before starting Docker Compose.
 
 ---
 
@@ -892,10 +978,11 @@ Failed: 0
 [x] Structured Research Reports
 [x] Agent Evaluation & Automated Tests
 [x] React / Next.js Frontend Dashboard
-[ ] Docker
-[ ] Production Deployment
+[x] Production Dockerization
+[ ] Production Cloud Deployment
 [ ] CI/CD
 ```
+
 
 
 ---

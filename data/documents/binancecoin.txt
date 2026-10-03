@@ -1,4 +1,4 @@
-Source: BNB Chain Documentation and Official Whitepaper.
+﻿Source: BNB Chain Documentation and Official Whitepaper.
 
 BNB (Binance Coin) is the native utility, gas, and governance token of the BNB Chain ecosystem, originally launched by Binance in 2017 as an ERC-20 token before migrating to its native blockchains.
 

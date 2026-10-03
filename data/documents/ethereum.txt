@@ -1,4 +1,4 @@
-Ethereum is a decentralized blockchain platform that enables smart contracts and decentralized applications.
+﻿Ethereum is a decentralized blockchain platform that enables smart contracts and decentralized applications.
 
 Ethereum uses proof-of-stake consensus to secure its network. Validators participate in the consensus process by staking ETH. Validators are responsible for proposing and validating blocks and helping maintain the integrity of the blockchain.
 

@@ -1,4 +1,4 @@
-from langchain_groq import ChatGroq
+﻿from langchain_groq import ChatGroq
 from langchain_core.tools import StructuredTool
 from langchain_core.messages import (
     HumanMessage,

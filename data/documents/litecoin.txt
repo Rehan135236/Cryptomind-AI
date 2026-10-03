@@ -1,6 +1,6 @@
-Source: Litecoin Open Source Project and Litecoin Foundation Documentation.
+﻿Source: Litecoin Open Source Project and Litecoin Foundation Documentation.
 
-Litecoin (LTC) is an open-source peer-to-peer cryptocurrency created in October 2011 by Charlie Lee, a former Google engineer. Designed as a lightweight fork of the Bitcoin codebase, Litecoin was created to serve as a fast, low-cost medium for daily global payments—often referred to as "the silver to Bitcoin's gold."
+Litecoin (LTC) is an open-source peer-to-peer cryptocurrency created in October 2011 by Charlie Lee, a former Google engineer. Designed as a lightweight fork of the Bitcoin codebase, Litecoin was created to serve as a fast, low-cost medium for daily global paymentsâ€”often referred to as "the silver to Bitcoin's gold."
 
 Litecoin shares Bitcoin's fundamental architecture but incorporates key technical modifications:
 1. Block Time: Litecoin produces blocks every 2.5 minutes (four times faster than Bitcoin's 10-minute target), enabling faster transaction confirmation times.

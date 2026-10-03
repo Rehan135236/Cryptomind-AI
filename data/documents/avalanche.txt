@@ -1,6 +1,6 @@
-Source: Avalanche Consensus Whitepaper by Emin Gün Sirer et al. (Ava Labs) and Official Avalanche Documentation.
+﻿Source: Avalanche Consensus Whitepaper by Emin GÃ¼n Sirer et al. (Ava Labs) and Official Avalanche Documentation.
 
-Avalanche is a smart contract platform designed for high throughput, sub-second finality, and custom blockchain network (subnet) deployments, created in 2020 by Emin Gün Sirer and Ava Labs.
+Avalanche is a smart contract platform designed for high throughput, sub-second finality, and custom blockchain network (subnet) deployments, created in 2020 by Emin GÃ¼n Sirer and Ava Labs.
 
 Avalanche utilizes a novel consensus protocol family based on repeated random subsampling. Instead of polling all validators, nodes repeatedly sample small random subsets of validators to reach rapid network agreement in under 1 second.
 

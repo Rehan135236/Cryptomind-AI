@@ -1,4 +1,4 @@
-import pytest
+﻿import pytest
 from src.config import TRACKED_ASSETS
 from src.database import get_db_connection
 from src.pipeline import execute_ingestion_cycle, get_latest_ingestion_status, get_data_freshness

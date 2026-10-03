@@ -1,4 +1,4 @@
-Source: Bitcoin Whitepaper ("Bitcoin: A Peer-to-Peer Electronic Cash System" by Satoshi Nakamoto, 2008) and Bitcoin.org Documentation.
+﻿Source: Bitcoin Whitepaper ("Bitcoin: A Peer-to-Peer Electronic Cash System" by Satoshi Nakamoto, 2008) and Bitcoin.org Documentation.
 
 Bitcoin is a decentralized peer-to-peer electronic cash system and digital asset created in 2008 by Satoshi Nakamoto. Unlike traditional fiat currencies controlled by central banks and governments, Bitcoin operates on an open, permissionless, decentralized network without central intermediaries or single points of failure.
 

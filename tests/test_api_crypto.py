@@ -1,4 +1,4 @@
-import pytest
+﻿import pytest
 from fastapi.testclient import TestClient
 from src.api import app
 from src.config import TRACKED_ASSETS

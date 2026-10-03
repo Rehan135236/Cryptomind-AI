@@ -1,4 +1,4 @@
-Source: Dogecoin Open Source Repository and Dogecoin Foundation Documentation.
+﻿Source: Dogecoin Open Source Repository and Dogecoin Foundation Documentation.
 
 Dogecoin (DOGE) is an open-source peer-to-peer cryptocurrency created in December 2013 by Billy Markus and Jackson Palmer as a lighthearted, meme-inspired digital currency based on the "Doge" Shiba Inu internet meme.
 

@@ -1,4 +1,4 @@
-import pytest
+﻿import pytest
 from src.scheduler import start_scheduler, stop_scheduler, get_scheduler_info
 from src.pipeline import _ingestion_lock
 

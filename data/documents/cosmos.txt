@@ -1,4 +1,4 @@
-Source: Cosmos Whitepaper by Jae Kwon & Ethan Buchman (2016) and Official Cosmos Network Documentation.
+﻿Source: Cosmos Whitepaper by Jae Kwon & Ethan Buchman (2016) and Official Cosmos Network Documentation.
 
 Cosmos is a decentralized ecosystem of independent, sovereign, interoperable Layer 1 blockchains known as the "Internet of Blockchains," founded by Jae Kwon and Ethan Buchman in 2014 and launched in 2019 under Interchain Foundation stewardship.
 

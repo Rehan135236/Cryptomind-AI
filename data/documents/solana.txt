@@ -1,4 +1,4 @@
-Source: Solana Whitepaper by Anatoly Yakovenko (2018) and Official Solana Documentation.
+﻿Source: Solana Whitepaper by Anatoly Yakovenko (2018) and Official Solana Documentation.
 
 Solana is a high-performance, open-source Layer 1 blockchain platform designed for scalable, low-latency decentralized applications and smart contract execution without relying on Layer 2 scaling solutions.
 

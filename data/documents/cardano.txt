@@ -1,4 +1,4 @@
-Source: Cardano Ouroboros Consensus Whitepaper by IOHK and Official Cardano Documentation.
+﻿Source: Cardano Ouroboros Consensus Whitepaper by IOHK and Official Cardano Documentation.
 
 Cardano is a proof-of-stake Layer 1 blockchain platform founded in 2017 by Charles Hoskinson and developed by Input Output Global (IOG/IOHK). Cardano is designed through peer-reviewed scientific research and formal methods verification.
 

@@ -1,4 +1,4 @@
-Source: XRP Ledger Consensus Protocol Whitepaper and Ripple Technical Documentation.
+﻿Source: XRP Ledger Consensus Protocol Whitepaper and Ripple Technical Documentation.
 
 XRP is the native digital asset of the XRP Ledger (XRPL), an open-source, public, decentralized blockchain created in 2012 by David Schwartz, Jed McCaleb, and Arthur Britto to facilitate fast, low-cost cross-border payments and currency transfers.
 

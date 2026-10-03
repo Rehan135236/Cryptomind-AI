@@ -11,6 +11,11 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("database")
 
+try:
+    from .config import sanitize_log_message
+except ImportError:
+    from config import sanitize_log_message
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL environment variable is not set.")
@@ -18,6 +23,7 @@ if not DATABASE_URL:
 # Pool configuration
 MIN_CONN = int(os.getenv("DB_POOL_MIN", "1"))
 MAX_CONN = int(os.getenv("DB_POOL_MAX", "10"))
+
 
 _connection_pool = None
 _sqlalchemy_engine = None
@@ -104,9 +110,10 @@ def get_db_connection():
         if conn.closed == 0:
             conn.commit()
     except (OperationalError, InterfaceError) as conn_err:
-        logger.warning(f"Database connection error: {conn_err}")
+        logger.warning(sanitize_log_message(f"Database connection error: {conn_err}"))
         should_close = True
         raise
+
     except Exception:
         if conn.closed == 0:
             try:

@@ -20,6 +20,8 @@ from .config import (
     GENERAL_RATE_LIMIT,
     RESEARCH_RATE_LIMIT,
     MAX_RESEARCH_QUERY_LENGTH,
+    validate_config,
+    sanitize_log_message,
 )
 from .analytics import (
     calculate_metrics,
@@ -85,17 +87,20 @@ app = FastAPI(
 # ============================================================
 # CORS HARDENING
 # ============================================================
+# Enforce strict non-wildcard origins when allow_credentials is True
+cors_origins = [origin for origin in CORS_ALLOWED_ORIGINS if origin != "*"] or ["http://localhost:3000"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ALLOWED_ORIGINS,
+    allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
 
 # ============================================================
-# REQUEST METADATA & TIMING MIDDLEWARE
+# REQUEST METADATA, SECURITY HEADERS & TIMING MIDDLEWARE
 # ============================================================
 @app.middleware("http")
 async def add_request_metadata_and_timing(request: Request, call_next):
@@ -135,6 +140,11 @@ async def add_request_metadata_and_timing(request: Request, call_next):
     duration_ms = round((time.perf_counter() - start_time) * 1000, 2)
     response.headers["X-Request-ID"] = req_id
     response.headers["X-Response-Time-Ms"] = str(duration_ms)
+    
+    # Production Security Headers
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
 
     logger.info(
         f"[Request ID: {req_id}] {request.method} {path} -> {response.status_code} ({duration_ms}ms)"
@@ -180,7 +190,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 @app.exception_handler(InterfaceError)
 async def database_exception_handler(request: Request, exc: Exception):
     req_id = getattr(request.state, "request_id", None)
-    logger.error(f"[Request ID: {req_id}] Database Error: {type(exc).__name__}: {str(exc)}")
+    safe_log = sanitize_log_message(f"Database Error: {type(exc).__name__}: {str(exc)}")
+    logger.error(f"[Request ID: {req_id}] {safe_log}")
     return JSONResponse(
         status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
         content={
@@ -195,7 +206,8 @@ async def database_exception_handler(request: Request, exc: Exception):
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
     req_id = getattr(request.state, "request_id", None)
-    logger.error(f"[Request ID: {req_id}] Unhandled Exception: {type(exc).__name__}: {str(exc)}", exc_info=True)
+    safe_log = sanitize_log_message(f"Unhandled Exception: {type(exc).__name__}: {str(exc)}")
+    logger.error(f"[Request ID: {req_id}] {safe_log}", exc_info=True)
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
@@ -247,7 +259,12 @@ class SymbolListResponse(BaseModel):
 @app.on_event("startup")
 def startup_event():
     logger.info("Initializing CryptoMind backend services...")
+    try:
+        validate_config()
+    except Exception as err:
+        logger.error(f"Configuration validation failed on startup: {err}")
     start_scheduler()
+
 
 
 @app.on_event("shutdown")

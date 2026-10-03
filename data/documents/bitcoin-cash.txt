@@ -1,4 +1,4 @@
-Source: Bitcoin Cash Technical Specification and Bitcoincash.org Documentation.
+﻿Source: Bitcoin Cash Technical Specification and Bitcoincash.org Documentation.
 
 Bitcoin Cash (BCH) is a peer-to-peer electronic cash system created on August 1, 2017, as a result of a hard fork from the original Bitcoin blockchain network.
 

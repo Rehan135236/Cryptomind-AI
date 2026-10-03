@@ -1,4 +1,4 @@
-Source: TRON Developer Documentation and TRON Architecture Whitepaper.
+﻿Source: TRON Developer Documentation and TRON Architecture Whitepaper.
 
 TRON is a decentralized, open-source blockchain platform founded in 2017 by Justin Sun and managed by the TRON DAO, optimized for high-throughput digital content sharing, smart contracts, and stablecoin transactions.
 

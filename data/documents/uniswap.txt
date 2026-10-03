@@ -1,4 +1,4 @@
-Source: Uniswap Protocol Whitepapers (v1, v2, v3, v4) by Hayden Adams et al. and Official Uniswap Documentation.
+﻿Source: Uniswap Protocol Whitepapers (v1, v2, v3, v4) by Hayden Adams et al. and Official Uniswap Documentation.
 
 Uniswap is a leading decentralized exchange (DEX) protocol built on the Ethereum blockchain, created in November 2018 by Hayden Adams.
 

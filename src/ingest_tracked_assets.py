@@ -1,4 +1,4 @@
-from src.pipeline import execute_ingestion_cycle
+﻿from src.pipeline import execute_ingestion_cycle
 
 
 def seed_tracked_assets():

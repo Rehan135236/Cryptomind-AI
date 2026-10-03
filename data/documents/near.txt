@@ -1,4 +1,4 @@
-Source: NEAR Protocol Technical Whitepaper by Illia Polosukhin & Alexander Skidanov and Official NEAR Documentation.
+﻿Source: NEAR Protocol Technical Whitepaper by Illia Polosukhin & Alexander Skidanov and Official NEAR Documentation.
 
 NEAR Protocol is a high-performance Layer 1 blockchain platform designed to provide a developer- and user-friendly environment for decentralized applications (dApps), founded in 2020 by Illia Polosukhin and Alexander Skidanov.
 

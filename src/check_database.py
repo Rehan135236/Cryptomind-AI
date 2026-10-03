@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 try:
     from .database import get_db_connection, get_connection, release_connection
     from .config import TRACKED_ASSETS

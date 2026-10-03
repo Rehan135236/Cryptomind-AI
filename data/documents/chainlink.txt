@@ -1,4 +1,4 @@
-Source: Chainlink Whitepaper v2 by Sergey Nazarov et al. and Official Chainlink Documentation.
+﻿Source: Chainlink Whitepaper v2 by Sergey Nazarov et al. and Official Chainlink Documentation.
 
 Chainlink is a decentralized oracle network founded in 2017 by Sergey Nazarov and Steve Ellis that securely connects smart contracts on any blockchain to off-chain real-world data, web APIs, legacy payment systems, and external computation.
 
